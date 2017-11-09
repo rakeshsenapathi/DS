@@ -20,27 +20,37 @@ public class CountingSort {
         System.out.println(Arrays.toString(sorted_array));
     }
 
-    private int[] countSort(int[] array) {
+    private int[] countSort(int[] arr) {
 
+        int length = arr.length;
+
+        int max_value = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (max_value < arr[i]) max_value = arr[i];
+
+        }
+
+        int range = max_value + 1;
 
         // The sorted array which is being return by the function
-        int[] axillary = new int[array.length + 1];
+        int[] axillary = new int[length];
 
         // Stores the frequency of a number.
-        int[] count = new int[array.length + 1];
-
+        int[] count = new int[range];
 
         // Initialise all the indices in the count array to 0.
-        for (int element : array) {
+        for (int i = 0; i < range; i++) {
 
-            count[array[element]] = 0;
+            count[i] = 0;
 
         }
 
         // Iterate through the array to update the frequencies.
-        for (int anArray : array) {
+        for (int i = 0; i < arr.length; i++) {
 
-            count[anArray]++;
+            count[arr[i]]++;
 
         }
 
@@ -50,23 +60,23 @@ public class CountingSort {
         *  Now to know the starting point of an element to populate we must change the count array.
         *  The next loop changes the count array.
         * */
+        for (int i = 1; i < range; i++) {
 
-        for (int i = 1; i < array.length; i++) { // We are excluding the index 0 since it is in place.
 
             count[i] = count[i] + count[i - 1];
-            // By adding the value from previous index the count array looks like { 0 , 1, 3, 4, 5, 6, 7}
-
 
         }
 
         // Count array gives the guideline about where to insert
         // We move from end of the array to left to preserve the stable sort property.
-        for (int i = array.length - 1; i >= 0; i--) {
+        for (int i = length - 1; i >= 0; i--) {
 
-            axillary[count[array[i]]] = array[i];
-            count[array[i]]--;
+            axillary[count[arr[i]] - 1] = arr[i];
+
+            count[arr[i]]--;
 
         }
+
 
         return axillary;
 
