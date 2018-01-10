@@ -1,0 +1,70 @@
+// Iterative Approach
+
+/*
+  Reverse a linked list and return pointer to the head
+  The input list will have at least one element  
+  Node is defined as  
+  class Node {
+     int data;
+     Node next;
+  }
+*/
+    // This is a "method-only" submission. 
+    // You only need to complete this method. 
+Node Reverse(Node head) {
+    
+    Node prev = null,next = null;
+    
+    Node current = head;
+    
+    
+    
+    while( current != null){
+        
+        next = current.next;
+        current.next = prev;
+        
+        prev = current;
+        
+        current = next;
+  
+    }
+    
+    return prev;
+    
+}
+
+
+// Recursive Approach
+
+/*
+  Reverse a linked list and return pointer to the head
+  The input list will have at least one element  
+  Node is defined as  
+  class Node {
+     int data;
+     Node next;
+  }
+*/
+    // This is a "method-only" submission. 
+    // You only need to complete this method. 
+Node Reverse(Node head) {
+    
+    // Going to last element and making last element as the head, recursively
+    if( head.next == null ){
+        
+       return head;        
+        
+    }
+    
+    Node newHead = Reverse(head.next);
+    
+    Node q = head.next;
+    
+    q.next = head;
+    
+    head.next = null;
+    
+    return newHead;
+    
+}

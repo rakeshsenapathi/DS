@@ -1,0 +1,36 @@
+boolean hasCycle(Node head) {
+    
+    Hashtable<Integer, Node> htable = new Hashtable<Integer, Node>();
+    
+    Node temp = head;
+    
+    Random rand = new Random();
+    
+    boolean value = false;
+    
+    while( temp != null ) {
+        
+        
+            if( htable.contains(temp)){
+                
+                value = true;
+                
+                break;
+                
+            }
+
+        
+           else {
+               
+               htable.put(rand.nextInt(), temp);
+               
+               temp = temp.next;
+               
+               
+           }     
+        
+    }
+    
+    return value;
+
+}
